@@ -3,12 +3,12 @@
 palette = "ember"
 
 format = """
-[](orange)\
+[](orange)\
 $directory\
-[](fg:orange bg:purple)\
+[](fg:orange bg:purple)\
 $git_branch\
 $git_status\
-[](fg:purple bg:bg2)\
+[](fg:purple bg:bg2)\
 $rust\
 $nodejs\
 $python\
@@ -17,12 +17,12 @@ $java\
 $kotlin\
 $lua\
 $dotnet\
-[](fg:bg2)\
+[](fg:bg2)\
 $fill\
-[](fg:bg2)\
+[](fg:bg2)\
 $cmd_duration\
 $time\
-[](fg:bg2)\
+[](fg:bg2)\
 $line_break\
 $character"""
 
