@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+vol=$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@)
+if echo "$vol" | grep -q MUTED; then
+    echo '{"text": "󰍭", "class": "muted", "tooltip": "Microphone muted"}'
+else
+    pct=$(echo "$vol" | awk '{print int($2*100)}')
+    jq -cn --arg pct "$pct" \
+      '{text: ("󰍬  " + $pct + "%"), class: "", tooltip: ("Microphone: " + $pct + "%")}'
+fi

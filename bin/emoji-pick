@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+export BEMOJI_PICKER_CMD="fuzzel --dmenu"
+bemoji -t

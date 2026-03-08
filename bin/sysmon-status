@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+hwmon_temp() {
+    local hw
+    for hw in /sys/class/hwmon/hwmon*/; do
+        if [[ -f "$hw/name" && "$(< "$hw/name")" == "$1" && -f "$hw/$2" ]]; then
+            echo $(( $(< "$hw/$2") / 1000 ))
+            return
+        fi
+    done
+    echo "-"
+}
+
+cpu_stat_file="${XDG_RUNTIME_DIR:-/tmp}/.sysmon-cpu-prev"
+read -r _ cu cn cs ci cio cirq csi cst _ < <(awk '/^cpu /{print}' /proc/stat)
+cpu_total=$((cu + cn + cs + ci + cio + cirq + csi + cst))
+cpu_busy=$((cu + cn + cs + cirq + csi + cst))
+if [[ -f "$cpu_stat_file" ]]; then
+    read -r prev_busy prev_total < "$cpu_stat_file"
+    dt=$((cpu_total - prev_total))
+    db=$((cpu_busy - prev_busy))
+    cpu_usage=$(( dt > 0 ? db * 100 / dt : 0 ))
+else
+    cpu_usage=0
+fi
+echo "$cpu_busy $cpu_total" > "$cpu_stat_file"
+# Hardware-specific: AMD CPU (k10temp), Intel Arc GPU (xe)
+cpu_temp=$(hwmon_temp k10temp temp1_input)
+gpu_temp=$(hwmon_temp xe temp2_input)
+
+read -r mem_total mem_avail < <(awk '/MemTotal/{t=$2} /MemAvailable/{a=$2} END{printf "%d %d\n", t, a}' /proc/meminfo)
+mem_used_gb=$(awk -v t="$mem_total" -v a="$mem_avail" 'BEGIN{printf "%.1f", (t - a) / 1048576}')
+mem_pct=$(( (mem_total - mem_avail) * 100 / mem_total ))
+
+fg_dim='#9a9491'
+
+class=""
+[[ "$cpu_temp" =~ ^[0-9]+$ && "$cpu_temp" -ge 85 ]] && class="critical"
+[[ "$gpu_temp" =~ ^[0-9]+$ && "$gpu_temp" -ge 90 ]] && class="critical"
+
+dim="<span color='${fg_dim}'>"
+end='</span>'
+
+text=$(printf "  %3s° %s%3s%%%s      %3s°      %5sG" \
+    "$cpu_temp" "$dim" "$cpu_usage" "$end" \
+    "$gpu_temp" \
+    "$mem_used_gb")
+
+cpu_line=$(printf "  CPU  %4s°C  %4s" "$cpu_temp" "${cpu_usage}%")
+gpu_line=$(printf "  GPU  %4s°C" "$gpu_temp")
+ram_line=$(printf "  RAM  %5s   %4s" "${mem_used_gb}G" "${mem_pct}%")
+
+tooltip="<tt>${cpu_line}
+${gpu_line}
+${ram_line}</tt>"
+
+jq -cn --arg text "$text" --arg tooltip "$tooltip" --arg class "$class" \
+  '{text: $text, tooltip: $tooltip, class: $class}'

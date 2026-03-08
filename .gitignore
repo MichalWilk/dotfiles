@@ -1,0 +1,56 @@
+# secrets
+*.cred
+.ssh/
+.gnupg/
+.netrc
+.git-credentials
+.aws/
+.kube/
+
+# bin subdirs (vendor, private, etc.)
+bin/*/
+
+# shell history
+.bash_history
+.histfile
+.node_repl_history
+
+# caches & generated
+.zcompdump
+.cache/
+.local/
+.mozilla/
+.npm/
+.cargo/
+
+# only track whitelisted .config dirs
+.config/*
+!.config/bat/
+!.config/btop/
+!.config/fuzzel/
+!.config/gitui/
+!.config/hypr/
+!.config/kitty/
+!.config/mise/
+!.config/mpv/
+!.config/nvim/
+!.config/sheldon/
+!.config/solaar/
+!.config/starship.toml
+!.config/swappy/
+!.config/swaync/
+!.config/waybar/
+!.config/zsh/
+
+# solaar - only rules.yaml
+.config/solaar/*
+!.config/solaar/rules.yaml
+
+# generated
+.config/environment.d/paths.conf
+
+# large files
+*.zip
+
+# dotfiles repo itself
+.dotfiles/

@@ -1,0 +1,200 @@
+/* swaync - Ember palette, orange accent */
+
+@define-color bg_hard  #1a1918;
+@define-color bg0      #242220;
+@define-color bg1      #2e2c2a;
+@define-color bg2      #3e3c3a;
+@define-color bg3      #524f4d;
+@define-color fg       #e8e4dd;
+@define-color fg_dim   #9a9491;
+@define-color red      #e85045;
+@define-color green    #85b829;
+@define-color yellow   #f0be38;
+@define-color blue     #5296c8;
+@define-color purple   #a87ac0;
+@define-color orange   #fe8019;
+
+* {
+    font-family: "Inter", "JetBrainsMono Nerd Font", sans-serif;
+    font-size: 13pt;
+}
+
+/* Notification popup */
+.notification-row {
+    outline: none;
+    margin: 0;
+    padding: 0;
+}
+
+.notification-row:hover {
+    background: transparent;
+}
+
+.notification {
+    background: alpha(@bg_hard, 0.75);
+    border: 1px solid alpha(@bg2, 0.45);
+    border-radius: 14px;
+    margin: 4px 16px;
+    padding: 0;
+}
+
+.notification-content {
+    padding: 12px 16px;
+}
+
+.notification .image {
+    border-radius: 10px;
+    margin-right: 12px;
+}
+
+.summary {
+    color: @fg;
+    font-weight: 600;
+    font-size: 13pt;
+}
+
+.body {
+    color: @fg_dim;
+    font-size: 12pt;
+}
+
+.time {
+    color: @bg3;
+    font-size: 11pt;
+}
+
+.notification.low {
+    border-color: alpha(@bg1, 0.4);
+}
+
+.notification.critical {
+    border-color: alpha(@red, 0.7);
+}
+
+.notification.critical .summary {
+    color: @red;
+}
+
+/* Action buttons */
+.notification-action {
+    background: alpha(@bg1, 0.5);
+    border: none;
+    border-top: 1px solid alpha(@bg2, 0.3);
+    border-radius: 0;
+    color: @orange;
+    font-size: 10pt;
+    font-weight: 500;
+    padding: 8px 12px;
+    transition: all 150ms ease;
+}
+
+.notification-action:first-child {
+    border-radius: 0 0 0 14px;
+}
+
+.notification-action:last-child {
+    border-radius: 0 0 14px 0;
+}
+
+.notification-action:hover {
+    background: alpha(@orange, 0.15);
+    color: @orange;
+}
+
+/* Close button */
+.close-button {
+    background: alpha(@bg1, 0.5);
+    border-radius: 50%;
+    color: @fg_dim;
+    min-width: 20px;
+    min-height: 20px;
+    margin: 6px;
+    padding: 0;
+    border: none;
+}
+
+.close-button:hover {
+    background: @red;
+    color: @fg;
+}
+
+/* Control center */
+.control-center {
+    background: alpha(@bg_hard, 0.75);
+    border: 1px solid alpha(@bg2, 0.45);
+    border-radius: 14px;
+    padding: 12px;
+}
+
+.control-center .notification-row .notification {
+    margin: 4px 0;
+    background: alpha(@bg0, 0.5);
+    border-color: alpha(@bg2, 0.25);
+    box-shadow: none;
+}
+
+.control-center .notification-row:hover .notification {
+    background: alpha(@bg1, 0.5);
+}
+
+/* Title widget */
+widget.title {
+    margin: 4px 4px 8px 4px;
+}
+
+widget.title > label {
+    color: @fg;
+    font-weight: 600;
+    font-size: 12pt;
+}
+
+widget.title > button {
+    background: alpha(@bg1, 0.5);
+    border: none;
+    border-radius: 10px;
+    color: @fg_dim;
+    font-size: 10pt;
+    padding: 4px 12px;
+    transition: all 150ms ease;
+}
+
+widget.title > button:hover {
+    background: alpha(@red, 0.2);
+    color: @red;
+}
+
+/* DND widget */
+widget.dnd {
+    margin: 4px;
+    padding: 4px 0;
+}
+
+widget.dnd > switch {
+    background: @bg1;
+    border-radius: 12px;
+    border: none;
+    min-height: 24px;
+    min-width: 44px;
+}
+
+widget.dnd > switch:checked {
+    background: @orange;
+}
+
+widget.dnd > switch slider {
+    background: @fg;
+    border-radius: 50%;
+    min-height: 20px;
+    min-width: 20px;
+}
+
+widget.dnd > label {
+    color: @fg_dim;
+    font-size: 10pt;
+}
+
+/* Empty placeholder */
+.widget-title > label.no-notifications {
+    color: @bg3;
+    font-size: 11pt;
+}

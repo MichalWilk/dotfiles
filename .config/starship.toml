@@ -1,0 +1,116 @@
+# Starship - Ember palette, powerline segments
+
+palette = "ember"
+
+format = """
+[](orange)\
+$directory\
+[](fg:orange bg:purple)\
+$git_branch\
+$git_status\
+[](fg:purple bg:bg2)\
+$rust\
+$nodejs\
+$python\
+$golang\
+$java\
+$kotlin\
+$lua\
+$dotnet\
+[](fg:bg2)\
+$fill\
+[](fg:bg2)\
+$cmd_duration\
+$time\
+[](fg:bg2)\
+$line_break\
+$character"""
+
+[directory]
+style = "fg:bg_hard bg:orange bold"
+format = "[  $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = ""
+style = "fg:bg_hard bg:purple bold"
+format = "[ $symbol $branch ]($style)"
+
+[git_status]
+style = "fg:yellow bg:purple"
+format = "[$all_status$ahead_behind]($style)"
+
+[rust]
+symbol = "󱘗"
+style = "fg:fg bg:bg2"
+format = "[ $symbol $version ]($style)"
+
+[nodejs]
+symbol = "󰎙"
+style = "fg:green bg:bg2"
+format = "[ $symbol $version ]($style)"
+
+[python]
+symbol = "󰌠"
+style = "fg:cyan bg:bg2"
+format = "[ $symbol $version ]($style)"
+
+[golang]
+symbol = "󰟓"
+style = "fg:cyan bg:bg2"
+format = "[ $symbol $version ]($style)"
+
+[java]
+symbol = "󰬷"
+style = "fg:red bg:bg2"
+format = "[ $symbol $version ]($style)"
+
+[kotlin]
+symbol = "󱈙"
+style = "fg:purple bg:bg2"
+format = "[ $symbol $version ]($style)"
+
+[lua]
+symbol = "󰢱"
+style = "fg:blue bg:bg2"
+format = "[ $symbol $version ]($style)"
+
+[dotnet]
+symbol = "󰪮"
+style = "fg:purple bg:bg2"
+format = "[ $symbol $version ]($style)"
+
+[fill]
+symbol = " "
+
+[cmd_duration]
+min_time = 2_000
+style = "fg:fg_dim bg:bg2"
+format = "[  $duration ]($style)"
+
+[time]
+time_format = "%H:%M"
+style = "fg:fg_dim bg:bg2"
+format = "[  $time ]($style)"
+
+[character]
+success_symbol = "[❯](bold orange)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold orange)"
+
+[palettes.ember]
+bg_hard = "#1a1918"
+bg0    = "#242220"
+bg1    = "#2e2c2a"
+bg2    = "#3e3c3a"
+bg3    = "#524f4d"
+fg_dim = "#9a9491"
+fg     = "#e8e4dd"
+red    = "#e85045"
+green  = "#85b829"
+yellow = "#f0be38"
+blue   = "#5296c8"
+purple = "#a87ac0"
+cyan   = "#5eb8a8"
+orange = "#fe8019"

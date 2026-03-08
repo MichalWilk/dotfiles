@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+entries=$'  Lock\n  Suspend\n  Reboot\n  Shutdown\n  Logout'
+
+selected=$(echo "$entries" | fuzzel --dmenu --prompt "Power > " --width 25 --lines 5)
+
+confirm() {
+    echo -e "Yes\nNo" | fuzzel --dmenu --prompt "$1? " --width 15 --lines 2
+}
+
+close_all_windows() {
+    pkill kitty || true
+    hyprctl clients -j | jq -r '.[].address' | while read -r addr; do
+        hyprctl dispatch closewindow "address:$addr" || true
+    done
+    local timeout=10
+    while [[ $(hyprctl clients -j | jq length) -gt 0 ]] && ((timeout-- > 0)); do
+        sleep 1
+    done
+}
+
+case "$selected" in
+    *Lock)      loginctl lock-session ;;
+    *Suspend)   systemctl suspend ;;
+    *Reboot)    [[ "$(confirm "Reboot")" == "Yes" ]] && { close_all_windows; systemctl reboot; } ;;
+    *Shutdown)  [[ "$(confirm "Shutdown")" == "Yes" ]] && { close_all_windows; systemctl poweroff; } ;;
+    *Logout)    [[ "$(confirm "Logout")" == "Yes" ]] && { close_all_windows; hyprctl dispatch exit; loginctl terminate-session self; } ;;
+esac

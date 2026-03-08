@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+is_running() {
+    pgrep -x "lan-mouse" >/dev/null
+}
+
+get_status() {
+    if is_running; then
+        echo '{"text":"󰍽","class":"active","alt":"active","tooltip":"LAN Mouse: Active"}'
+    else
+        echo '{"text":"󰍾","class":"inactive","alt":"inactive","tooltip":"LAN Mouse: Inactive"}'
+    fi
+}
+
+toggle() {
+    if is_running; then
+        pkill -x lan-mouse
+        notify-send "LAN Mouse" "Daemon stopped"
+    else
+        lan-mouse daemon >/dev/null 2>&1 &
+        disown
+        notify-send "LAN Mouse" "Daemon started"
+    fi
+}
+
+case "$1" in
+    status)
+        get_status
+        ;;
+    toggle)
+        toggle
+        ;;
+    *)
+        get_status
+        ;;
+esac

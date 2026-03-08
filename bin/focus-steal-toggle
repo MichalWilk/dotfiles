@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+val=$(hyprctl getoption misc:focus_on_activate -j | jq -r '.int')
+if [[ "$val" == "1" ]]; then
+    hyprctl keyword misc:focus_on_activate false >/dev/null
+else
+    hyprctl keyword misc:focus_on_activate true >/dev/null
+fi

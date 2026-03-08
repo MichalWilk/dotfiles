@@ -1,0 +1,71 @@
+[include]
+	path = ~/.gitconfig.local
+
+[core]
+	autocrlf = input
+	pager = delta
+
+[pull]
+	rebase = true
+
+[push]
+	default = current
+	autoSetupRemote = true
+
+[fetch]
+	prune = true
+	fsckobjects = true
+
+[transfer]
+	fsckobjects = true
+
+[receive]
+	fsckobjects = true
+
+[merge]
+	conflictstyle = zdiff3
+
+[rebase]
+	autoSquash = true
+	autoStash = true
+
+[rerere]
+	enabled = true
+	autoUpdate = true
+
+[diff]
+	algorithm = histogram
+	colorMoved = default
+
+[commit]
+	verbose = true
+
+[column]
+	ui = auto
+
+[branch]
+	sort = -committerdate
+
+[delta]
+	navigate = true
+	side-by-side = true
+	line-numbers = true
+	hyperlinks = true
+	syntax-theme = gruvbox-dark
+
+[delta "interactive"]
+	keep-plus-minus-markers = false
+
+[alias]
+	s  = status -sb
+	l  = log --oneline -20
+	la = log --oneline --all --graph -30
+	ll = log --format='%C(yellow)%h %C(blue)%ad %C(green)%an%C(auto)%d %C(reset)%s' --date=short
+	d  = diff
+	ds = diff --staged
+	undo = reset --soft HEAD~1
+	wip = !git add -u && git commit -m 'wip'
+	nuke = !echo '⚠ NUKE: discard all changes in 2s (Ctrl-C to abort)' && sleep 2 && git clean -fd && git checkout -- .
+
+[url "git@github.com:"]
+	insteadOf = gh:

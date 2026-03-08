@@ -1,0 +1,107 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+is_recording() {
+    pgrep wf-recorder >/dev/null
+}
+
+get_active_window_geom() {
+    hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"'
+}
+
+RECORDING_FILE="${XDG_RUNTIME_DIR:-/tmp}/.wf-recorder-path"
+
+start_recording() {
+    local type="$1"
+    local dir="$HOME/Videos"
+    mkdir -p "$dir" || { notify-send "wf-recorder" "Cannot create $dir"; return 1; }
+    local file="$dir/recording_$(date +%Y%m%d_%H%M%S).mkv"
+    echo "$file" > "$RECORDING_FILE"
+
+    case "${type,,}" in
+        region)     wf-recorder -g "$(slurp)" -f "$file" & ;;
+        window)     wf-recorder -g "$(get_active_window_geom)" -f "$file" & ;;
+        fullscreen) wf-recorder -f "$file" & ;;
+    esac
+
+    notify-send "wf-recorder" "Recording started"
+    pkill -RTMIN+11 waybar
+}
+
+stop_recording() {
+    local file=$(cat "$RECORDING_FILE" 2>/dev/null)
+    pkill -INT wf-recorder
+    while pgrep wf-recorder >/dev/null; do sleep 0.1; done
+    rm -f "$RECORDING_FILE"
+    pkill -RTMIN+11 waybar
+
+    (
+        action=$(notify-send -A "open=Open folder" -A "play=Play" \
+            -t 10000 "wf-recorder" "Saved: ${file##*/}")
+        case "$action" in
+            open) xdg-open "$(dirname "$file")" ;;
+            play) mpv "$file" ;;
+        esac
+    ) &
+}
+
+take_screenshot() {
+    local type="$1"
+
+    case "${type,,}" in
+        region)     grim -g "$(slurp)" - | swappy -f - ;;
+        window)     grim -g "$(get_active_window_geom)" - | swappy -f - ;;
+        fullscreen) grim - | swappy -f - ;;
+    esac
+}
+
+pick() {
+    local prompt="$1"; shift
+    printf '%s\n' "$@" | fuzzel --dmenu --prompt="$prompt " --width=20 --lines=${#@}
+}
+
+# --- Modes ---
+# screenshot region/window/fullscreen  — screenshot
+# record region/window/fullscreen      — video
+# stop                                 — stop recording
+# toggle                               — fuzzel menu
+# status                               — waybar JSON
+case "${1:-}" in
+    status)
+        if is_recording; then
+            echo '{"text":"󰑊","class":"recording","alt":"recording"}'
+        else
+            echo '{"text":"󰄀","class":"idle","alt":"idle"}'
+        fi
+        ;;
+    stop)
+        is_recording && stop_recording
+        ;;
+    record)
+        if is_recording; then
+            stop_recording
+        else
+            start_recording "${2:-region}"
+        fi
+        ;;
+    toggle)
+        if is_recording; then
+            stop_recording
+            exit 0
+        fi
+
+        action=$(pick "Action" "Screenshot" "Video" "Cancel")
+        [[ -z "$action" || "$action" == "Cancel" ]] && exit 0
+
+        type=$(pick "Target" "Fullscreen" "Window" "Region" "Cancel")
+        [[ -z "$type" || "$type" == "Cancel" ]] && exit 0
+
+        case "$action" in
+            Screenshot) take_screenshot "$type" ;;
+            Video)      start_recording "$type" ;;
+        esac
+        ;;
+    *)
+        take_screenshot "${1:-region}"
+        ;;
+esac

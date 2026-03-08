@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+case "${1:-}" in
+    input)
+        current=$(ddcutil getvcp 60 | sed -n "s/.*(sl=\(.*\))/\1/p")
+        [[ -z "$current" ]] && { echo "Failed to read monitor input"; exit 1; }
+        case $current in
+            0x11) name="Display port"; val=0x10 ;;
+            0x10) name="HDMI";         val=0x11 ;;
+            *)    echo "Unknown input"; exit 1 ;;
+        esac
+        ddcutil setvcp 60 "$val"
+        notify-send -c device -a "Monitor" -u low "Input" "$name"
+        ;;
+    mode)
+        current=$(ddcutil getvcp DC | sed -n "s/.*(sl=\(.*\))/\1/p")
+        [[ -z "$current" ]] && { echo "Failed to read monitor mode"; exit 1; }
+        case $current in
+            0x0a) name="Low blue light"; val=0x13 ;;
+            0x13) name="sRGB";           val=0x0a ;;
+            *)    name="sRGB";           val=0x0a ;;
+        esac
+        ddcutil setvcp DC "$val"
+        notify-send -c device -a "Monitor" -u low "Mode" "$name"
+        ;;
+    *)
+        echo "Usage: monitor [input|mode]"
+        exit 1
+        ;;
+esac

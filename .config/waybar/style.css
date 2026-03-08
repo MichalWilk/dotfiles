@@ -1,0 +1,287 @@
+/* waybar - Ember palette, orange accent */
+
+@define-color bg_hard    #1a1918;
+@define-color bg0        #242220;
+@define-color bg1        #2e2c2a;
+@define-color bg2        #3e3c3a;
+@define-color bg3        #524f4d;
+@define-color bg4        #6a6765;
+@define-color fg         #e8e4dd;
+@define-color fg_dim     #9a9491;
+@define-color red        #e85045;
+@define-color green      #85b829;
+@define-color yellow     #f0be38;
+@define-color blue       #5296c8;
+@define-color purple     #a87ac0;
+@define-color cyan       #5eb8a8;
+@define-color orange     #fe8019;
+
+/* Bar */
+window#waybar {
+    background: transparent;
+    font-family: "Inter", "JetBrainsMono Nerd Font", sans-serif;
+    font-size: 11pt;
+    font-weight: 500;
+    font-feature-settings: "tnum";
+    color: @fg;
+}
+
+/* Icon-only modules */
+#custom-pike,
+#custom-kdeconnect,
+#custom-lan-mouse,
+#bluetooth,
+#custom-screenshot,
+#idle_inhibitor,
+#custom-notification,
+#custom-power {
+    font-size: 16px;
+    min-width: 16px;
+}
+
+window#waybar > box {
+    background: alpha(@bg0, 0.82);
+    border: 1px solid alpha(@bg2, 0.45);
+    border-radius: 14px;
+    padding: 0 10px;
+    margin: 0;
+    box-shadow: 0 2px 12px alpha(#000000, 0.35);
+}
+
+/* Module base */
+#custom-apps,
+#workspaces,
+#window,
+#clock,
+#mpris,
+#pulseaudio,
+#custom-mic,
+#custom-screenshot,
+#custom-pike,
+#custom-kdeconnect,
+#custom-lan-mouse,
+#bluetooth,
+#idle_inhibitor,
+#custom-notification,
+#custom-resources,
+#tray,
+#custom-power {
+    padding: 0 6px;
+    margin: 6px 0;
+    border-radius: 10px;
+    background: transparent;
+    transition: all 150ms ease;
+}
+
+/* Hover */
+#custom-apps:hover,
+#clock:hover,
+#mpris:hover,
+#pulseaudio:hover,
+#custom-mic:hover,
+#custom-screenshot:hover,
+#custom-pike:hover,
+#custom-kdeconnect:hover,
+#custom-lan-mouse:hover,
+#bluetooth:hover,
+#idle_inhibitor:hover,
+#custom-notification:hover,
+#custom-resources:hover,
+#custom-power:hover {
+    background: alpha(@bg1, 0.65);
+}
+
+/* Workspaces */
+#workspaces {
+    padding: 0 2px;
+}
+
+#workspaces button {
+    all: unset;
+    font-size: inherit;
+    padding: 0 4px;
+    margin: 7px 0;
+    min-width: 10px;
+    min-height: 10px;
+    border-radius: 50%;
+    color: @fg;
+    transition: all 200ms ease;
+}
+
+#workspaces button.empty {
+    color: @fg_dim;
+}
+
+#workspaces button.active {
+    color: @orange;
+}
+
+#workspaces button.urgent {
+    color: @red;
+}
+
+#workspaces button:hover {
+    color: @cyan;
+}
+
+/* Window title */
+#window {
+    color: @fg;
+    font-weight: 400;
+}
+
+/* Clock */
+#clock {
+    color: @fg;
+    font-weight: 600;
+}
+
+/* Media */
+#mpris {
+    color: @fg;
+    font-weight: 400;
+}
+
+#mpris.playing {
+    color: @orange;
+}
+
+#mpris.paused {
+    color: @bg4;
+}
+
+/* Volume */
+#pulseaudio {
+    color: @fg;
+    min-width: 60px;
+}
+
+#pulseaudio.muted {
+    color: @orange;
+}
+
+/* Microphone */
+#custom-mic {
+    color: @fg;
+    min-width: 60px;
+}
+
+#custom-mic.muted {
+    color: @orange;
+    font-size: 16px;
+    min-width: 16px;
+}
+
+/* Resources (CPU / GPU / RAM) */
+#custom-resources {
+    color: @fg;
+}
+
+#custom-resources.critical {
+    color: @red;
+}
+
+/* Apps button */
+#custom-apps {
+    color: @fg;
+}
+
+/* Notifications */
+#custom-notification {
+    color: @fg;
+}
+
+/* Pike updates */
+#custom-pike {
+    color: @fg;
+}
+
+#custom-pike.has-updates {
+    color: @orange;
+}
+
+#custom-pike.error {
+    color: @red;
+}
+
+/* KDE Connect */
+#custom-kdeconnect {
+    color: @fg_dim;
+}
+
+#custom-kdeconnect.connected {
+    color: @orange;
+}
+
+/* LAN Mouse */
+#custom-lan-mouse {
+    color: @fg_dim;
+}
+
+#custom-lan-mouse.active {
+    color: @orange;
+}
+
+/* Bluetooth */
+#bluetooth {
+    color: @fg_dim;
+}
+
+#bluetooth.connected {
+    color: @orange;
+}
+
+/* Idle inhibitor */
+#idle_inhibitor {
+    color: @fg_dim;
+}
+
+#idle_inhibitor.activated {
+    color: @orange;
+}
+
+/* Screenshot */
+#custom-screenshot {
+    color: @fg;
+}
+
+#custom-screenshot.recording {
+    color: @red;
+    animation: blink 1s ease infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0.3; }
+}
+
+/* Tray */
+#tray {
+    padding: 0 6px;
+    margin: 6px 0;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
+/* Power */
+#custom-power {
+    color: @fg;
+}
+
+/* Tooltip */
+tooltip {
+    background: alpha(@bg0, 0.82);
+    border: 1px solid alpha(@bg2, 0.5);
+    border-radius: 10px;
+    padding: 12px 18px;
+    color: @fg;
+}
+
+tooltip label {
+    color: @fg;
+}

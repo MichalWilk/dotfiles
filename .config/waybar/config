@@ -1,0 +1,196 @@
+{
+  "layer": "top",
+  "position": "top",
+  "margin-top": 4,
+  "margin-left": 8,
+  "margin-right": 8,
+  "spacing": 8,
+  "reload_style_on_change": true,
+  "modules-left": [
+    "custom/apps",
+    "hyprland/workspaces",
+    "hyprland/window"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "mpris",
+    "pulseaudio",
+    "custom/mic",
+    "custom/resources",
+    "custom/pike",
+    "custom/kdeconnect",
+    "custom/lan-mouse",
+    "bluetooth",
+    "custom/screenshot",
+    "idle_inhibitor",
+    "custom/notification",
+    "tray",
+    "custom/power"
+  ],
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "active": "●",
+      "urgent": "●",
+      "default": "●",
+      "empty": "○"
+    },
+    "persistent-workspaces": {
+      "*": 10
+    }
+  },
+  "hyprland/window": {
+    "format": "{title}",
+    "max-length": 40,
+    "rewrite": {
+      "(.*) - Brave": "󰖟 $1"
+    },
+    "separate-outputs": true
+  },
+  "clock": {
+    "format": "{:%a %d %b  %H:%M}",
+    "tooltip-format": "<tt><big>{calendar}</big></tt>",
+    "calendar": {
+      "mode": "month",
+      "weeks-pos": "right",
+      "format": {
+        "months": "<span color='#fe8019'><b>{}</b></span>",
+        "days": "<span color='#e8e4dd'>{}</span>",
+        "weeks": "<span color='#524f4d'>{}</span>",
+        "weekdays": "<span color='#fe8019'>{}</span>",
+        "today": "<span color='#1a1918' bgcolor='#fe8019'><b>{}</b></span>"
+      }
+    },
+    "on-click": "thunderbird -calendar"
+  },
+  "mpris": {
+    "format": "{status_icon}",
+    "format-paused": "{status_icon}",
+    "format-stopped": "",
+    "status-icons": {
+      "playing": "",
+      "paused": "",
+      "stopped": ""
+    },
+    "tooltip-format": "{artist} — {title}\n{album} ({player})",
+    "on-click": "playerctl play-pause"
+  },
+  "pulseaudio": {
+    "format": "{icon}   {volume}%",
+    "format-muted": "",
+    "format-icons": {
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-click-right": "$TERMINAL --title wiremix -e wiremix --tab playback",
+    "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+",
+    "on-scroll-down": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%-",
+    "tooltip-format": "{desc}  {volume}%"
+  },
+  "custom/mic": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "~/bin/mic-status",
+    "interval": 2,
+    "signal": 10,
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && pkill -RTMIN+10 waybar",
+    "on-click-right": "$TERMINAL --title wiremix -e wiremix --tab recording",
+    "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SOURCE@ 5%+",
+    "on-scroll-down": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SOURCE@ 5%-"
+  },
+  "custom/resources": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "~/bin/sysmon-status",
+    "interval": 3,
+    "on-click": "$TERMINAL --title btop -e btop"
+  },
+  "custom/notification": {
+    "format": "{icon}",
+    "return-type": "json",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t",
+    "on-click-right": "swaync-client -C",
+    "escape": true,
+    "format-icons": {
+      "notification": "󰂚",
+      "none": "󰂜",
+      "dnd-notification": "󰂛",
+      "dnd-none": "󰪑",
+      "inhibited-notification": "󰂚",
+      "inhibited-none": "󰂜",
+      "dnd-inhibited-notification": "󰂛",
+      "dnd-inhibited-none": "󰪑"
+    }
+  },
+  "bluetooth": {
+    "format": "󰂯",
+    "format-connected": "󰂱 {num_connections}",
+    "format-disabled": "󰂲",
+    "format-off": "",
+    "tooltip-format": "{controller_alias}\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}",
+    "on-click": "blueman-manager"
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰛊",
+      "deactivated": "󰾪"
+    },
+    "tooltip-format-activated": "Idle inhibitor: on",
+    "tooltip-format-deactivated": "Idle inhibitor: off"
+  },
+  "custom/screenshot": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "~/bin/screenshot status",
+    "interval": 2,
+    "on-click": "~/bin/screenshot toggle",
+    "signal": 11
+  },
+  "tray": {
+    "icon-size": 16,
+    "spacing": 8
+  },
+  "custom/apps": {
+    "format": "",
+    "tooltip-format": "Applications",
+    "on-click": "fuzzel"
+  },
+  "custom/pike": {
+    "exec": "pike waybar",
+    "return-type": "json",
+    "on-click": "pike check --notify-always",
+    "on-click-right": "$TERMINAL --title pike-tui -e pike tui --tab updates",
+    "format": "{}"
+  },
+  "custom/kdeconnect": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "~/bin/kdeconnect-status status",
+    "interval": 5,
+    "on-click": "kdeconnect-cli --refresh",
+    "on-click-right": "kdeconnect-app"
+  },
+  "custom/lan-mouse": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "~/bin/lan-mouse-toggle status",
+    "interval": 2,
+    "on-click": "~/bin/lan-mouse-toggle toggle && pkill -RTMIN+12 waybar",
+    "signal": 12
+  },
+  "custom/power": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "~/bin/power-menu"
+  }
+}

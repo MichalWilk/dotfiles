@@ -1,0 +1,21 @@
+shell = "zsh"
+
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+tag = "v0.7.1"
+
+[plugins.zsh-syntax-highlighting]
+github = "zsh-users/zsh-syntax-highlighting"
+tag = "0.8.0"
+
+[plugins.zsh-completions]
+github = "zsh-users/zsh-completions"
+tag = "0.35.0"
+
+[plugins.fzf-tab]
+github = "Aloxaf/fzf-tab"
+tag = "v1.2.0"
+
+[plugins.you-should-use]
+github = "MichaelAquilina/zsh-you-should-use"
+tag = "1.11.1"
