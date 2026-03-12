@@ -42,14 +42,14 @@ class=""
 dim="<span color='${fg_dim}'>"
 end='</span>'
 
-text=$(printf "  %3s° %s%3s%%%s      %3s°      %5sG" \
+text=$(printf "󰍛 %3s° %s%3s%%%s   󰢮 %3s°   󰘚 %5sG" \
     "$cpu_temp" "$dim" "$cpu_usage" "$end" \
     "$gpu_temp" \
     "$mem_used_gb")
 
-cpu_line=$(printf "  CPU  %4s°C  %4s" "$cpu_temp" "${cpu_usage}%")
-gpu_line=$(printf "  GPU  %4s°C" "$gpu_temp")
-ram_line=$(printf "  RAM  %5s   %4s" "${mem_used_gb}G" "${mem_pct}%")
+cpu_line=$(printf "󰍛 CPU  %4s°C  %4s" "$cpu_temp" "${cpu_usage}%")
+gpu_line=$(printf "󰢮 GPU  %4s°C" "$gpu_temp")
+ram_line=$(printf "󰘚 RAM  %5s   %4s" "${mem_used_gb}G" "${mem_pct}%")
 
 tooltip="<tt>${cpu_line}
 ${gpu_line}

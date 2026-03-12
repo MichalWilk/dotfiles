@@ -1,7 +1,7 @@
 [tools]
 bun = "latest"
+dart = { version = "latest", url = "https://storage.googleapis.com/dart-archive/channels/stable/release/{{ version }}/sdk/dartsdk-{{ os() }}-{{ arch() }}-release.zip", version_list_url = "https://storage.googleapis.com/storage/v1/b/dart-archive/o?prefix=channels/stable/release/&delimiter=/", version_regex = 'channels/stable/release/(\d+\.\d+\.\d+)/' }
 dotnet = "10"
-java = "temurin-21"
-kotlin = { version = "latest", asset_pattern = "kotlin-compiler-*.zip", bin_path = "kotlinc/bin" }
+flutter = { version = "latest", platforms = { linux-arm64 = { url = 'https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_arm64_{{ version | replace(from="-stable", to="") }}-stable.tar.xz' }, linux-x64 = { url = 'https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_{{ version | replace(from="-stable", to="") }}-stable.tar.xz' } }, url = 'https://storage.googleapis.com/flutter_infra_release/releases/stable/{{ os() }}/flutter_{{ os() }}{{ arch(x64="", arm64="_arm64") }}_{{ version | replace(from="-stable", to="") }}-stable.zip', version_expr = 'fromJSON(body).releases | filter(attribute="channel", value="stable") | map(attribute="version") | sortVersions()', version_list_url = "https://storage.googleapis.com/flutter_infra_release/releases/releases_linux.json" }
 node = "lts"
 rust = "latest"
