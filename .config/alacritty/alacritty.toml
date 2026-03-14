@@ -1,0 +1,58 @@
+[terminal]
+shell = { program = "tmux", args = ["new-session"] }
+
+[window]
+opacity = 0.75
+padding = { x = 12, y = 8 }
+decorations = "None"
+
+[font]
+size = 11.0
+
+[font.normal]
+family = "JetBrainsMono Nerd Font Mono"
+style = "Regular"
+
+[font.bold]
+style = "Bold"
+
+[font.italic]
+style = "Italic"
+
+[font.bold_italic]
+style = "Bold Italic"
+
+[selection]
+save_to_clipboard = true
+
+[colors.primary]
+foreground = "#e8e4dd"
+background = "#1a1918"
+
+[colors.selection]
+text = "#1a1918"
+background = "#fe8019"
+
+[colors.cursor]
+text = "#1a1918"
+cursor = "#e8e4dd"
+
+[colors.normal]
+black = "#1a1918"
+red = "#e85045"
+green = "#85b829"
+yellow = "#f0be38"
+blue = "#5296c8"
+magenta = "#a87ac0"
+cyan = "#5eb8a8"
+white = "#9a9491"
+
+[colors.bright]
+black = "#6a6765"
+red = "#ff6b63"
+green = "#a0d140"
+yellow = "#fcd050"
+blue = "#6aaed8"
+magenta = "#c094d4"
+cyan = "#7ed0c0"
+white = "#e8e4dd"

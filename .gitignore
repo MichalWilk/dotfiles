@@ -1,11 +1,17 @@
 # secrets
 *.cred
+*.env
+*.pem
+*.key
 .ssh/
 .gnupg/
 .netrc
 .git-credentials
+.gitconfig.local
 .aws/
 .kube/
+.config/gh/
+.config/atuin/
 
 # bin subdirs (vendor, private, etc.)
 bin/*/
@@ -13,6 +19,8 @@ bin/*/
 # shell history
 .bash_history
 .histfile
+.zsh_history
+.zhistory
 .node_repl_history
 
 # caches & generated
@@ -28,9 +36,9 @@ bin/*/
 !.config/bat/
 !.config/btop/
 !.config/fuzzel/
+!.config/alacritty/
 !.config/gitui/
 !.config/hypr/
-!.config/kitty/
 !.config/mise/
 !.config/mpv/
 !.config/nvim/
@@ -39,6 +47,7 @@ bin/*/
 !.config/starship.toml
 !.config/swappy/
 !.config/swaync/
+!.config/tmux/
 !.config/waybar/
 !.config/zsh/
 

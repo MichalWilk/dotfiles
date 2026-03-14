@@ -62,11 +62,7 @@ alias mr='mise run'
 alias mi='mise install'
 alias mu='mise use'
 
-# Kitty
-alias ssh='kitten ssh'
-alias rawssh='command ssh'
-
 # Quick edit
 alias zrc='nvim ~/.config/zsh/'
 alias hrc='nvim ~/.config/hypr/hyprland.conf'
-alias krc='nvim ~/.config/kitty/kitty.conf'
+alias arc='nvim ~/.config/alacritty/alacritty.toml'

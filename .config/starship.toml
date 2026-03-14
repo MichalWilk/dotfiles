@@ -3,7 +3,7 @@
 palette = "ember"
 
 format = """
-[](orange)\
+[](orange)\
 $directory\
 [](fg:orange bg:purple)\
 $git_branch\
@@ -19,10 +19,7 @@ $lua\
 $dotnet\
 [](fg:bg2)\
 $fill\
-[](fg:bg2)\
 $cmd_duration\
-$time\
-[](fg:bg2)\
 $line_break\
 $character"""
 
@@ -87,12 +84,10 @@ symbol = " "
 [cmd_duration]
 min_time = 2_000
 style = "fg:fg_dim bg:bg2"
-format = "[  $duration ]($style)"
+format = "[](fg:bg2)[  $duration ](fg:fg_mid bg:bg2)[](fg:bg2)"
 
 [time]
-time_format = "%H:%M"
-style = "fg:fg_dim bg:bg2"
-format = "[  $time ]($style)"
+disabled = true
 
 [character]
 success_symbol = "[❯](bold orange)"
@@ -106,6 +101,7 @@ bg1    = "#2e2c2a"
 bg2    = "#3e3c3a"
 bg3    = "#524f4d"
 fg_dim = "#9a9491"
+fg_mid = "#c0bab5"
 fg     = "#e8e4dd"
 red    = "#e85045"
 green  = "#85b829"

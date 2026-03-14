@@ -88,7 +88,7 @@
       ]
     },
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-    "on-click-right": "$TERMINAL --class wiremix -e wiremix --tab playback",
+    "on-click-right": "$TERMINAL --class=com.local.wiremix -e wiremix --tab playback",
     "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+",
     "on-scroll-down": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%-",
     "tooltip-format": "{desc}  {volume}%"
@@ -100,7 +100,7 @@
     "interval": 2,
     "signal": 10,
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && pkill -RTMIN+10 waybar",
-    "on-click-right": "$TERMINAL --class wiremix -e wiremix --tab recording",
+    "on-click-right": "$TERMINAL --class=com.local.wiremix -e wiremix --tab recording",
     "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SOURCE@ 5%+",
     "on-scroll-down": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SOURCE@ 5%-"
   },
@@ -109,7 +109,7 @@
     "return-type": "json",
     "exec": "~/bin/sysmon-status",
     "interval": 3,
-    "on-click": "$TERMINAL --title btop -e btop"
+    "on-click": "$TERMINAL --class=com.local.btop --title=btop -e btop"
   },
   "custom/notification": {
     "format": "{icon}",
@@ -169,7 +169,7 @@
     "exec": "pike waybar",
     "return-type": "json",
     "on-click": "pike check --notify-always",
-    "on-click-right": "$TERMINAL --class pike-tui -e pike tui --tab updates",
+    "on-click-right": "$TERMINAL --class=com.local.pike-tui -e pike tui --tab updates",
     "format": "{}"
   },
   "custom/kdeconnect": {
