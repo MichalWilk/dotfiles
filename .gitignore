@@ -38,10 +38,14 @@ bin/*/
 !.config/fuzzel/
 !.config/alacritty/
 !.config/gitui/
+!.config/gtk-3.0/
+!.config/gtk-4.0/
 !.config/hypr/
 !.config/mise/
 !.config/mpv/
 !.config/nvim/
+!.config/qt5ct/
+!.config/qt6ct/
 !.config/sheldon/
 !.config/solaar/
 !.config/starship.toml

@@ -87,8 +87,8 @@
         ""
       ]
     },
-    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-    "on-click-right": "$TERMINAL --class=com.local.wiremix -e wiremix --tab playback",
+    "on-click": "$TERMINAL --class=com.local.wiremix -e wiremix --tab playback",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+",
     "on-scroll-down": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%-",
     "tooltip-format": "{desc}  {volume}%"
@@ -99,8 +99,8 @@
     "exec": "~/bin/mic-status",
     "interval": 2,
     "signal": 10,
-    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && pkill -RTMIN+10 waybar",
-    "on-click-right": "$TERMINAL --class=com.local.wiremix -e wiremix --tab recording",
+    "on-click": "$TERMINAL --class=com.local.wiremix -e wiremix --tab recording",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && pkill -RTMIN+10 waybar",
     "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SOURCE@ 5%+",
     "on-scroll-down": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SOURCE@ 5%-"
   },
@@ -116,7 +116,7 @@
     "return-type": "json",
     "exec": "swaync-client -swb",
     "on-click": "swaync-client -t",
-    "on-click-right": "swaync-client -C",
+    "on-click-right": "swaync-client -d",
     "escape": true,
     "format-icons": {
       "notification": "󰂚",
@@ -137,7 +137,8 @@
     "tooltip-format": "{controller_alias}\n{num_connections} connected",
     "tooltip-format-connected": "{controller_alias}\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}",
-    "on-click": "blueman-manager"
+    "on-click": "blueman-manager",
+    "on-click-right": "rfkill toggle bluetooth"
   },
   "idle_inhibitor": {
     "format": "{icon}",
@@ -177,8 +178,8 @@
     "return-type": "json",
     "exec": "~/bin/kdeconnect-status status",
     "interval": 5,
-    "on-click": "kdeconnect-cli --refresh",
-    "on-click-right": "kdeconnect-app"
+    "on-click": "kdeconnect-app",
+    "on-click-right": "kdeconnect-cli --refresh"
   },
   "custom/lan-mouse": {
     "format": "{}",
