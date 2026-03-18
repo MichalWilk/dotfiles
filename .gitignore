@@ -49,6 +49,7 @@ bin/*/
 !.config/sheldon/
 !.config/solaar/
 !.config/starship.toml
+!.config/xdg-terminals.list
 !.config/swappy/
 !.config/swaync/
 !.config/tmux/

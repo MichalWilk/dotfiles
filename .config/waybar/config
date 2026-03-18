@@ -169,8 +169,8 @@
   "custom/pike": {
     "exec": "pike waybar",
     "return-type": "json",
-    "on-click": "pike check --notify-always",
-    "on-click-right": "$TERMINAL --class=com.local.pike-tui -e pike tui --tab updates",
+    "on-click": "$TERMINAL --class=com.local.pike-tui -e pike tui --tab updates",
+    "on-click-right": "pike check --notify-always",
     "format": "{}"
   },
   "custom/kdeconnect": {
