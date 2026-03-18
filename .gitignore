@@ -48,6 +48,7 @@ bin/*/
 !.config/qt5ct/
 !.config/qt6ct/
 !.config/sheldon/
+!.config/zathura/
 !.config/solaar/
 !.config/starship.toml
 !.config/xdg-terminals.list
