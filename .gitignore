@@ -27,6 +27,7 @@ bin/*/
 .zcompdump
 .cache/
 .local/
+!.local/share/flatpak/overrides/global
 .mozilla/
 .npm/
 .cargo/
