@@ -70,7 +70,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("claude-desktop --startup")
     hl.exec_cmd("sh -c 'cd ~/bin/vendor/act_runner && ./act_runner daemon'")
 
-    -- Workspace-pinned startup. VERIFY: exec rules table form (see notes).
+    -- Workspace-pinned startup
     hl.exec_cmd("firefox", { workspace = "1 silent" })
     hl.exec_cmd(terminal, { workspace = "2 silent" })
     hl.exec_cmd("flatpak run com.spotify.Client")

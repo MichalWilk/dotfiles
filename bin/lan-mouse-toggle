@@ -24,7 +24,7 @@ toggle() {
     fi
 }
 
-case "$1" in
+case "${1:-status}" in
     status)
         get_status
         ;;

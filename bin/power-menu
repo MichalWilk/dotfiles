@@ -11,7 +11,7 @@ confirm() {
 
 close_all_windows() {
     hyprctl clients -j | jq -r '.[].address' | while read -r addr; do
-        hyprctl dispatch closewindow "address:$addr" || true
+        hyprctl dispatch "hl.dsp.exec_raw(\"closewindow address:$addr\")" || true
     done
     local timeout=10
     while [[ $(hyprctl clients -j | jq length) -gt 0 ]] && ((timeout-- > 0)); do
@@ -24,5 +24,5 @@ case "$selected" in
     *Suspend)   systemctl suspend ;;
     *Reboot)    [[ "$(confirm "Reboot")" == "Yes" ]] && { close_all_windows; systemctl reboot; } ;;
     *Shutdown)  [[ "$(confirm "Shutdown")" == "Yes" ]] && { close_all_windows; systemctl poweroff; } ;;
-    *Logout)    [[ "$(confirm "Logout")" == "Yes" ]] && { close_all_windows; hyprctl dispatch exit; loginctl terminate-session self; } ;;
+    *Logout)    [[ "$(confirm "Logout")" == "Yes" ]] && { close_all_windows; hyprctl dispatch 'hl.dsp.exit()'; } ;;
 esac

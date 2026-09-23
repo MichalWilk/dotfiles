@@ -22,7 +22,6 @@
     "custom/pike",
     "custom/kdeconnect",
     "custom/lan-mouse",
-    "bluetooth",
     "custom/screenshot",
     "idle_inhibitor",
     "custom/notification",
@@ -38,14 +37,16 @@
       "empty": "○"
     },
     "persistent-workspaces": {
-      "*": 10
-    }
+      "*": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    },
+    "on-scroll-down": "hyprctl dispatch 'hl.dsp.focus({workspace=\"e+1\"})'",
+    "on-scroll-up": "hyprctl dispatch 'hl.dsp.focus({workspace=\"e-1\"})'"
   },
   "hyprland/window": {
     "format": "{title}",
     "max-length": 40,
     "rewrite": {
-      "(.*) - Brave": "󰖟 $1"
+      "(.*) — Mozilla Firefox": "󰖟 $1"
     },
     "separate-outputs": true
   },
@@ -128,17 +129,6 @@
       "dnd-inhibited-notification": "󰂛",
       "dnd-inhibited-none": "󰪑"
     }
-  },
-  "bluetooth": {
-    "format": "󰂯",
-    "format-connected": "󰂱 {num_connections}",
-    "format-disabled": "󰂲",
-    "format-off": "",
-    "tooltip-format": "{controller_alias}\n{num_connections} connected",
-    "tooltip-format-connected": "{controller_alias}\n\n{device_enumerate}",
-    "tooltip-format-enumerate-connected": "{device_alias}",
-    "on-click": "blueman-manager",
-    "on-click-right": "rfkill toggle bluetooth"
   },
   "idle_inhibitor": {
     "format": "{icon}",

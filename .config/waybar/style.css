@@ -30,7 +30,6 @@ window#waybar {
 #custom-pike,
 #custom-kdeconnect,
 #custom-lan-mouse,
-#bluetooth,
 #custom-screenshot,
 #idle_inhibitor,
 #custom-notification,
@@ -60,7 +59,6 @@ window#waybar > box {
 #custom-pike,
 #custom-kdeconnect,
 #custom-lan-mouse,
-#bluetooth,
 #idle_inhibitor,
 #custom-notification,
 #custom-resources,
@@ -83,7 +81,6 @@ window#waybar > box {
 #custom-pike:hover,
 #custom-kdeconnect:hover,
 #custom-lan-mouse:hover,
-#bluetooth:hover,
 #idle_inhibitor:hover,
 #custom-notification:hover,
 #custom-resources:hover,
@@ -219,15 +216,6 @@ window#waybar > box {
 }
 
 #custom-lan-mouse.active {
-    color: @orange;
-}
-
-/* Bluetooth */
-#bluetooth {
-    color: @fg_dim;
-}
-
-#bluetooth.connected {
     color: @orange;
 }
 

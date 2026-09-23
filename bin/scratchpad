@@ -1,11 +1,8 @@
 #!/usr/bin/python3
-"""Toggle a special workspace that holds a single window, starting it on first use.
+"""Usage: scratchpad <workspace> <window-class> <command> [args...]
 
-Usage: scratchpad <workspace> <window-class> <command> [args...]
-
-The window is recognised by class and moved to the workspace by address, so windows
-started the ordinary way stay where they were opened. A lock keeps rapid key presses
-from starting several instances while the first one is still coming up.
+Toggles a special workspace holding one window. The new window is moved there by
+address, so windows started the ordinary way stay where they were opened.
 """
 import fcntl
 import json
