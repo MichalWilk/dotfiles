@@ -1,0 +1,6 @@
+#!/bin/sh
+# One lock screen at a time. Counting processes is unreliable: hyprlock leaves helper
+# processes behind after an unlock, and logind's LockedHint stays "no" while locked.
+# The lock is held for as long as hyprlock runs, so a second call just exits.
+# grace is no longer a config option in hyprlock 0.9.6, only a flag.
+exec flock -n "${XDG_RUNTIME_DIR:-/tmp}/hyprlock.lock" hyprlock --grace 3

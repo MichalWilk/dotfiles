@@ -1,0 +1,3 @@
+#!/bin/sh
+# One line for the hyprlock label: playback state icon and current track.
+playerctl metadata --format '{{emoji(status)}} {{artist}} - {{title}}' 2>/dev/null

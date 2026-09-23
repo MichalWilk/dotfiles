@@ -1,0 +1,67 @@
+#!/usr/bin/python3
+"""Toggle a special workspace that holds a single window, starting it on first use.
+
+Usage: scratchpad <workspace> <window-class> <command> [args...]
+
+The window is recognised by class and moved to the workspace by address, so windows
+started the ordinary way stay where they were opened. A lock keeps rapid key presses
+from starting several instances while the first one is still coming up.
+"""
+import fcntl
+import json
+import os
+import subprocess
+import sys
+import time
+
+if len(sys.argv) < 4:
+    raise SystemExit(__doc__)
+
+workspace, window_class, command = sys.argv[1], sys.argv[2], sys.argv[3:]
+special = f"special:{workspace}"
+
+runtime = os.environ.get("XDG_RUNTIME_DIR", "/tmp")
+lock = open(os.path.join(runtime, f"scratchpad-{workspace}.lock"), "w")
+try:
+    fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+except BlockingIOError:
+    raise SystemExit  # another press is still being handled
+
+
+def hypr(*args):
+    return subprocess.run(["hyprctl", *args], capture_output=True, text=True).stdout
+
+
+def windows():
+    return [c for c in json.loads(hypr("clients", "-j")) if c["class"] == window_class]
+
+
+def toggle():
+    hypr("dispatch", f'hl.dsp.workspace.toggle_special("{workspace}")')
+
+
+if any(w["workspace"]["name"] == special for w in windows()):
+    toggle()
+    raise SystemExit
+
+known = {w["address"] for w in windows()}
+subprocess.Popen(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
+
+new = None
+for _ in range(40):
+    time.sleep(0.25)
+    fresh = [w for w in windows() if w["address"] not in known]
+    if fresh:
+        new = fresh[0]
+        break
+
+if new is None:
+    raise SystemExit(f"no new {window_class} window appeared")
+
+hypr("dispatch", f'hl.dsp.focus({{ window = "address:{new["address"]}" }})')
+time.sleep(0.2)
+hypr("dispatch", f'hl.dsp.window.move({{ workspace = "{special}" }})')
+time.sleep(0.2)
+
+if json.loads(hypr("monitors", "-j"))[0]["specialWorkspace"]["name"] != special:
+    toggle()
