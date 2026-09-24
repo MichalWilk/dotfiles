@@ -1,9 +1,5 @@
 #!/usr/bin/python3
-"""Usage: scratchpad <workspace> <window-class> <command> [args...]
-
-Toggles a special workspace holding one window. The new window is moved there by
-address, so windows started the ordinary way stay where they were opened.
-"""
+"""Usage: scratchpad <workspace> <window-class> <command> [args...]"""
 import fcntl
 import json
 import os
@@ -22,7 +18,7 @@ lock = open(os.path.join(runtime, f"scratchpad-{workspace}.lock"), "w")
 try:
     fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
 except BlockingIOError:
-    raise SystemExit  # another press is still being handled
+    raise SystemExit
 
 
 def hypr(*args):
