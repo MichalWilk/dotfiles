@@ -44,6 +44,7 @@ hl.env("ELECTRON_OZONE_PLATFORM_HINT", "wayland")
 ------------------------------------------------------------
 
 hl.on("hyprland.start", function()
+    hl.exec_cmd("gnome-keyring-daemon --start --components=ssh")
     hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP GNOME_KEYRING_CONTROL SSH_AUTH_SOCK")
     -- pulls in graphical-session.target, without which xdg-desktop-portal refuses to start
     hl.exec_cmd("systemctl --user start hyprland-session.target")
