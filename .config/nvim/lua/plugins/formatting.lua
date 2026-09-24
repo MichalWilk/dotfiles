@@ -16,6 +16,8 @@ return {
                 typescriptreact = { "prettierd" },
                 javascript = { "prettierd" },
                 javascriptreact = { "prettierd" },
+                svelte = { "prettierd" },
+                toml = { "taplo" },
                 kotlin = { "ktlint" },
                 cs = { "csharpier" },
                 lua = { "stylua" },

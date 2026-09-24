@@ -2,6 +2,10 @@
 
 palette = "ember"
 
+# 30 ms default trips on a cold cache when a terminal starts
+scan_timeout = 500
+command_timeout = 1000
+
 format = """
 [](orange)\
 $directory\

@@ -10,6 +10,11 @@ return {
         opts = {
             ensure_installed = {
                 "ts_ls",
+                "svelte",
+                "tailwindcss",
+                "taplo",
+                "dockerls",
+                "docker_compose_language_service",
                 "kotlin_language_server",
                 "omnisharp",
                 "lua_ls",
@@ -49,6 +54,16 @@ return {
                 },
             })
 
+            vim.lsp.config("docker_compose_language_service", {
+                settings = {
+                    docker = {
+                        compose = {
+                            commandPath = "podman-compose",
+                        },
+                    },
+                },
+            })
+
             vim.lsp.config("rust_analyzer", {
                 settings = {
                     ["rust-analyzer"] = {
@@ -60,6 +75,11 @@ return {
             -- Enable all servers
             vim.lsp.enable({
                 "ts_ls",
+                "svelte",
+                "tailwindcss",
+                "taplo",
+                "dockerls",
+                "docker_compose_language_service",
                 "kotlin_language_server",
                 "omnisharp",
                 "lua_ls",
