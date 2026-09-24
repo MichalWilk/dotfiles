@@ -29,6 +29,11 @@ window, dialog, messagedialog {
     color: #e8e4dd;
 }
 
+window.floating-notifications,
+window.floating-notifications.background {
+    background-color: transparent;
+}
+
 headerbar, .titlebar {
     background-color: #242220;
     background-image: none;
