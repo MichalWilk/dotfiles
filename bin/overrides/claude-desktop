@@ -1,0 +1,3 @@
+#!/bin/sh
+# electron multiplies this by the compositor scale, so 1.15 renders ~15% larger than native apps
+exec flatpak run com.anthropic.Claude --force-device-scale-factor=1.15 "$@"

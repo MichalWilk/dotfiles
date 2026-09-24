@@ -15,6 +15,7 @@
 
 # bin subdirs (vendor, private, etc.)
 bin/*/
+!bin/overrides/
 
 # shell history
 .bash_history
@@ -57,6 +58,13 @@ bin/*/
 !.config/tmux/
 !.config/waybar/
 !.config/zsh/
+!.config/mimeapps.list
+!.config/systemd/
+.config/systemd/user/*
+!.config/systemd/user/hyprland-session.target
+!.config/doublecmd/
+.config/doublecmd/*
+!.config/doublecmd/doublecmd.xml
 
 # solaar - only rules.yaml
 .config/solaar/*

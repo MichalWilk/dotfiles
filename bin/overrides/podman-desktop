@@ -1,0 +1,2 @@
+#!/bin/sh
+exec flatpak run --env=GDK_SCALE=2 io.podman_desktop.PodmanDesktop --force-device-scale-factor=1.15 "$@"

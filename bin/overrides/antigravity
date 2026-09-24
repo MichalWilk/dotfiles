@@ -1,0 +1,2 @@
+#!/bin/sh
+exec /usr/share/antigravity/bin/antigravity --force-device-scale-factor=1.15 "$@"
